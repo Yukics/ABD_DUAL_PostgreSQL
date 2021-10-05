@@ -1,0 +1,22 @@
+version: "3.3"
+services:
+  db:
+    container_name: postgres
+    image: postgres:9.6.23
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: password_secreto
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres-data:/var/lib/postgresql
+  pgadmin:
+    container_name: pg_admin
+    image: dpage/pgadmin4:5
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: password_secreto
+    ports:
+      - "5050:80"
