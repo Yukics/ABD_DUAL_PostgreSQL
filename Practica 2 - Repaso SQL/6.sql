@@ -1,0 +1,1 @@
+SELECT count(customer_id) as "Total clientes que empiezan por C" FROM customers WHERE UPPER(contact_name) LIKE 'C%';

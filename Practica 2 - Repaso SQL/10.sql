@@ -1,0 +1,1 @@
+SELECT product_id, product_name, unit_price FROM products WHERE unit_price BETWEEN 12 AND 24;

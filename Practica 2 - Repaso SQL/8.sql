@@ -1,0 +1,1 @@
+ALTER TABLE customers ADD contain_s boolean;

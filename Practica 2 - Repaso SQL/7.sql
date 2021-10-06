@@ -1,0 +1,1 @@
+SELECT count(customer_id) as "Total clientes que contienen la S" FROM customers WHERE upper(contact_name) LIKE '%S%';

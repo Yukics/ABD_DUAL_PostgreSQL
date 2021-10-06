@@ -1,0 +1,1 @@
+SELECT sum(quantity) as "Total de unidades encomendadas" FROM order_details WHERE product_id=60;

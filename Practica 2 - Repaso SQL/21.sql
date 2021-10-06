@@ -1,0 +1,1 @@
+SELECT ship_country, count(order_id) as "Total" FROM orders GROUP BY ship_country ORDER BY "Total" DESC LIMIT 3;
