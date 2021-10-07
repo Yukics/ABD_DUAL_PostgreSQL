@@ -1,2 +1,2 @@
-select company_name, contact_name, phone, city, country from customers 
-where country in ('Spain', 'Argentina') and city != 'Barcelona'
+SELECT company_name, contact_name, phone, city, country FROM customers 
+WHERE country IN ('Spain', 'Argentina') AND city != 'Barcelona'
