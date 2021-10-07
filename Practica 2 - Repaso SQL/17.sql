@@ -1,1 +1,1 @@
-SELECT avg(a.Total) FROM (SELECT order_id, (unit_price * quantity)*(1-discount) AS Total FROM order_details) as a
+SELECT avg(a.Total) FROM (SELECT order_id, (unit_price * quantity)*(1-discount) AS Total FROM order_details) AS a
