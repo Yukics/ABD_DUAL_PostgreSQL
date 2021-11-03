@@ -1,0 +1,1 @@
+CREATE ROLE "client1" LOGIN IN ROLE client_rol;

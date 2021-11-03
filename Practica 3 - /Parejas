@@ -1,0 +1,5 @@
+postgresql.conf
+
+#*=localhost 
+
+descomentar linea y poner =*

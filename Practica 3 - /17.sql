@@ -1,0 +1,1 @@
+ALTER ROLE "miriam" PASSWORD 'password2';
