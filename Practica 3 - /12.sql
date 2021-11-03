@@ -1,1 +1,1 @@
-root@1188227283ff:/var/lib/postgresql/data# echo "host miriam miriam 127.0.0.1/32 password" >> pg_hba.conf
+root@1188227283ff:/var/lib/postgresql/data# echo "local miriam miriam password" >> pg_hba.conf

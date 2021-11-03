@@ -1,0 +1,1 @@
+root@1188227283ff:/var/lib/postgresql/data# psql -U miriam miriam
