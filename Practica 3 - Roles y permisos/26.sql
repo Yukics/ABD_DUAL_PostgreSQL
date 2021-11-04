@@ -1,0 +1,1 @@
+psql -U client1 -h 192.168.1.101 (IP de donde este el postgres)
