@@ -1,0 +1,1 @@
+ALTER ROLE "client1" connection limit 1;
