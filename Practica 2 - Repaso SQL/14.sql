@@ -12,3 +12,7 @@ INNER JOIN (SELECT o.customer_id, count(o.order_id) AS ycount FROM orders AS o W
 ON x.xcount=y.ycount 
 INNER JOIN customers AS c
 ON c.customer_id=x.customer_id;
+
+-- Query rehecha
+Select distinct customer_id from orders where order_date < '1997-01-01' 
+and customer_id not in (Select distinct customer_id from orders where order_date >= '1997-01-01')
