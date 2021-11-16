@@ -22,9 +22,11 @@ WHERE order_id = 11068;
 
 -- Creamos la regla INSERT
 
+DROP RULE r_insertLastOrders ON public.v_lastTenOrders
+
 CREATE RULE r_insertLastOrders AS ON INSERT TO public.v_lastTenOrders
     DO INSTEAD
-    INSERT INTO public.v_lastTenOrders VALUES (
+    INSERT INTO public.orders(order_id,customer_id,ship_name) VALUES (
         NEW.order_id,
         NEW.customer_id,
         NEW.ship_name
