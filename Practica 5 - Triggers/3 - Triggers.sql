@@ -30,7 +30,7 @@ CREATE OR REPLACE FUNCTION f_deleteCasats() RETURNS trigger AS $$
         UPDATE persones SET estat = 'divorciat', num_divorciat = num_divorciat + 1 WHERE OLD.persona2=id_persona;
         INSERT INTO divorciats VALUES(OLD.persona1,OLD.persona2,OLD.data_casament, CURRENT_DATE);
 
-        RETURN NEW;
+        RETURN OLD;
     END;
 $$ LANGUAGE plpgsql;
 
