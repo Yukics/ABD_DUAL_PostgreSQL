@@ -1,0 +1,1 @@
+CREATE TYPE estat_civil AS (solter text, casat text, divorciat text);
