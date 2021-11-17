@@ -1,1 +1,1 @@
-CREATE TYPE estat_civil AS (solter text, casat text, divorciat text);
+CREATE TYPE estat_civil AS ENUM (solter text, casat text, divorciat text);
