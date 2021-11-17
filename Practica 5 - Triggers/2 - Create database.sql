@@ -1,4 +1,7 @@
 -- Database creation and data insertion
+DROP TABLE IF EXISTS persones;
+DROP TABLE IF EXISTS casats;
+DROP TABLE IF EXISTS divorciats;
 
 CREATE TABLE persones (
     id_persona int NOT NULL,
