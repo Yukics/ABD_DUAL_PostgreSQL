@@ -26,6 +26,7 @@ CREATE TABLE casats (
 CREATE TABLE divorciats (
     persona1 int NOT NULL,
     persona2 int NOT NULL,
+    data_casament date NOT NULL,
     data_divorci date NOT NULL,
     PRIMARY KEY(persona1, persona2),
     CONSTRAINT fk_persona1_divorciats FOREIGN KEY(persona1) REFERENCES persones(id_persona),
