@@ -1,1 +1,2 @@
-CREATE TYPE estat_civil AS ENUM (solter text, casat text, divorciat text);
+DROP TYPE IF EXISTS estat_civil;
+CREATE TYPE estat_civil AS ENUM ('solter', 'casat', 'divorciat');
