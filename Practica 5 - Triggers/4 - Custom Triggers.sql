@@ -38,6 +38,7 @@ CREATE OR REPLACE FUNCTION f_bckpCustomer() RETURNS trigger AS $$
         -- Check that the table exists
         IF NOT EXISTS (SELECT FROM pg_catalog.pg_tables WHERE schemaname = 'chinook' AND tablename = 'bckpCustomer') THEN 
             CREATE TABLE bckpCustomer (
+                "Id" SERIAL PRIMARY KEY,
                 "CustomerId" INT NOT NULL,
                 "FirstName" VARCHAR(40) NOT NULL,
                 "LastName" VARCHAR(20) NOT NULL,
@@ -50,19 +51,29 @@ CREATE OR REPLACE FUNCTION f_bckpCustomer() RETURNS trigger AS $$
                 "Phone" VARCHAR(24),
                 "Fax" VARCHAR(24),
                 "Email" VARCHAR(60) NOT NULL,
-                "SupportRepId" INT,
-                CONSTRAINT "PK_Customer" PRIMARY KEY  ("CustomerId"));
+                "SupportRepId" INT);
         END IF;
 
-        -- If the table has 10 rows it updates the oldest or inserts a new row
-        IF (SELECT COUNT(*) FROM newSong) = 10 THEN
-            UPDATE UPDATE newSong SET name = OLD.Name, insert_date = CURRENT_DATE WHERE insert_date=(SELECT insert_date FROM newSong ORDER BY insert_date ASC LIMIT 1);
-        ELSE
-            INSERT INTO newSongs VALUES(OLD.Name, CURRENT_DATE);
-        END IF;
+        -- Inserts a new entry to backup table autoincremental Id
+        INSERT INTO bckpCustomer VALUES (
+                DEFAULT,
+                OLD.CustomerId,
+                OLD.FirstName,
+                OLD.LastName,
+                OLD.Company,
+                OLD.Address,
+                OLD.City,
+                OLD.State,
+                OLD.Country,
+                OLD.PostalCode,
+                OLD.Phone,
+                OLD.Fax,
+                OLD.Email,
+                OLD.SupportRepId
+            );
          
         RETURN NEW;
     END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE TRIGGER t_bckpCustomer BEFORE UPDATE ON Customer FOR EACH ROW EXECUTE PROCEDURE f_bckpCustomer();
+CREATE OR REPLACE TRIGGER t_bckpCustomer BEFORE UPDATE OR DELETE ON Customer FOR EACH ROW EXECUTE PROCEDURE f_bckpCustomer();
