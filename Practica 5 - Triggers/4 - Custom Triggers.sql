@@ -41,7 +41,18 @@ INSERT INTO "Track" VALUES(3609, 'Alexa play despacito', 347,2,24,NULL,3214543, 
 INSERT INTO "Track" VALUES(3610, 'AHHHHHHHHHHHHH en do mayor', 347,2,24,NULL,3214543, 9879432, '0.99');
 INSERT INTO "Track" VALUES(3611, 'Funca o no funca', 347,2,24,NULL,3214543, 9879432, '0.99');
 
-
+DELETE FROM "Track" WHERE "TrackId"=3600;
+DELETE FROM "Track" WHERE "TrackId"=3601;
+DELETE FROM "Track" WHERE "TrackId"=3602;
+DELETE FROM "Track" WHERE "TrackId"=3603;
+DELETE FROM "Track" WHERE "TrackId"=3604;
+DELETE FROM "Track" WHERE "TrackId"=3605;
+DELETE FROM "Track" WHERE "TrackId"=3606;
+DELETE FROM "Track" WHERE "TrackId"=3607;
+DELETE FROM "Track" WHERE "TrackId"=3608;
+DELETE FROM "Track" WHERE "TrackId"=3609;
+DELETE FROM "Track" WHERE "TrackId"=3610;
+DELETE FROM "Track" WHERE "TrackId"=3611;
 
 -- Trigger on update customer
 -- Este trigger hace un backup de la información de los customer 
