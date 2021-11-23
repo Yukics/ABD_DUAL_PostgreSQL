@@ -27,6 +27,22 @@ $$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE TRIGGER t_newSong AFTER INSERT ON Track FOR EACH ROW EXECUTE PROCEDURE f_newSong();
 
+-- TEST
+INSERT INTO "Track" VALUES(3600, 'Cococabra', 347,2,24,NULL,3214543, 9879432, '0.99');
+INSERT INTO "Track" VALUES(3601, 'Ave maria cuando seras mia', 347,2,24,NULL,3214543, 9879432, '0.99');
+INSERT INTO "Track" VALUES(3602, 'Caja de zapatos', 347,2,24,NULL,3214543, 9879432, '0.99');
+INSERT INTO "Track" VALUES(3603, 'Autismo', 347,2,24,NULL,3214543, 9879432, '0.99');
+INSERT INTO "Track" VALUES(3604, 'AHHHHHH', 347,2,24,NULL,3214543, 9879432, '0.99');
+INSERT INTO "Track" VALUES(3605, 'Sisoy', 347,2,24,NULL,3214543, 9879432, '0.99');
+INSERT INTO "Track" VALUES(3606, 'Maburro', 347,2,24,NULL,3214543, 9879432, '0.99');
+INSERT INTO "Track" VALUES(3607, 'Y la culpa no era mía', 347,2,24,NULL,3214543, 9879432, '0.99');
+INSERT INTO "Track" VALUES(3608, 'Tengo una vaca lechera', 347,2,24,NULL,3214543, 9879432, '0.99');
+INSERT INTO "Track" VALUES(3609, 'Alexa play despacito', 347,2,24,NULL,3214543, 9879432, '0.99');
+INSERT INTO "Track" VALUES(3610, 'AHHHHHHHHHHHHH en do mayor', 347,2,24,NULL,3214543, 9879432, '0.99');
+INSERT INTO "Track" VALUES(3611, 'Funca o no funca', 347,2,24,NULL,3214543, 9879432, '0.99');
+
+
+
 -- Trigger on update customer
 -- Este trigger hace un backup de la información de los customer 
 
