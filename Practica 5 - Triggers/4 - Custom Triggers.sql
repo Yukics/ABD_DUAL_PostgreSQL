@@ -52,7 +52,7 @@ DELETE FROM "Track" WHERE "TrackId"=3609;
 DELETE FROM "Track" WHERE "TrackId"=3610;
 DELETE FROM "Track" WHERE "TrackId"=3611;
 
--- Trigger on update customer
+-- Trigger on update or delete customer
 -- Este trigger hace un backup de la información de los customer 
 
 DROP TRIGGER IF EXISTS t_bckpCustomer ON Customer; 
@@ -61,40 +61,39 @@ DROP FUNCTION IF EXISTS f_bckpCustomer();
 CREATE OR REPLACE FUNCTION f_bckpCustomer() RETURNS trigger AS $$
     BEGIN
         -- Check that the table exists
-        IF NOT EXISTS (SELECT FROM pg_catalog.pg_tables WHERE schemaname = 'chinook' AND tablename = 'bckpCustomer') THEN 
-            CREATE TABLE bckpCustomer (
-                "Id" SERIAL PRIMARY KEY,
-                "CustomerId" INT NOT NULL,
-                "FirstName" VARCHAR(40) NOT NULL,
-                "LastName" VARCHAR(20) NOT NULL,
-                "Company" VARCHAR(80),
-                "Address" VARCHAR(70),
-                "City" VARCHAR(40),
-                "State" VARCHAR(40),
-                "Country" VARCHAR(40),
-                "PostalCode" VARCHAR(10),
-                "Phone" VARCHAR(24),
-                "Fax" VARCHAR(24),
-                "Email" VARCHAR(60) NOT NULL,
-                "SupportRepId" INT);
-        END IF;
+        CREATE TABLE IF NOT EXISTS "bckpCustomer" (
+            "Id" SERIAL PRIMARY KEY,
+            "CustomerId" INT NOT NULL,
+            "FirstName" VARCHAR(40) NOT NULL,
+            "LastName" VARCHAR(20) NOT NULL,
+            "Company" VARCHAR(80),
+            "Address" VARCHAR(70),
+            "City" VARCHAR(40),
+            "State" VARCHAR(40),
+            "Country" VARCHAR(40),
+            "PostalCode" VARCHAR(10),
+            "Phone" VARCHAR(24),
+            "Fax" VARCHAR(24),
+            "Email" VARCHAR(60) NOT NULL,
+            "SupportRepId" INT);
+
 
         -- Inserts a new entry to backup table autoincremental Id
-        INSERT INTO bckpCustomer VALUES (
+        INSERT INTO "bckpCustomer" VALUES (
                 DEFAULT,
-                OLD.CustomerId,
-                OLD.FirstName,
-                OLD.LastName,
-                OLD.Company,
-                OLD.Address,
-                OLD.City,
-                OLD.State,
-                OLD.Country,
-                OLD.PostalCode,
-                OLD.Phone,
-                OLD.Fax,
-                OLD.Email,
-                OLD.SupportRepId
+                NEW."CustomerId",
+                NEW."FirstName",
+                NEW."LastName",
+                NEW."Company",
+                NEW."Address",
+                NEW."City",
+                NEW."State",
+                NEW."Country",
+                NEW."PostalCode",
+                NEW."Phone",
+                NEW."Fax",
+                NEW."Email",
+                NEW."SupportRepId"
             );
          
         RETURN NEW;
