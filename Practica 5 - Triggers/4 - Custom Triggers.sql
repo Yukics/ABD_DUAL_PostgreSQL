@@ -10,22 +10,20 @@ DROP FUNCTION IF EXISTS f_newSong();
 CREATE OR REPLACE FUNCTION f_newSong() RETURNS trigger AS $$
     BEGIN
         -- Check that the table exists
-        IF NOT EXISTS (SELECT FROM pg_catalog.pg_tables WHERE schemaname = 'chinook' AND tablename = 'newSong') THEN 
-            CREATE TABLE newSongs (name character varying(200) NOT NULL, insert_date date);
-        END IF;
+        CREATE TABLE IF NOT EXISTS "newSongs" ("Name" character varying(200) NOT NULL, insert_date timestamp);
 
         -- If the table has 10 rows it updates the oldest or inserts a new row
-        IF (SELECT COUNT(*) FROM newSong) = 10 THEN
-            UPDATE UPDATE newSong SET name = OLD.Name, insert_date = CURRENT_DATE WHERE insert_date=(SELECT insert_date FROM newSong ORDER BY insert_date ASC LIMIT 1);
+        IF (SELECT COUNT(*) FROM "newSongs") = 10 THEN
+            UPDATE "newSongs" SET "Name" = NEW."Name", insert_date = CURRENT_TIMESTAMP WHERE insert_date=(SELECT insert_date FROM "newSongs" ORDER BY insert_date ASC LIMIT 1);
         ELSE
-            INSERT INTO newSongs VALUES(OLD.Name, CURRENT_DATE);
+            INSERT INTO "newSongs" VALUES(NEW."Name", CURRENT_TIMESTAMP);
         END IF;
          
         RETURN NEW;
     END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE TRIGGER t_newSong AFTER INSERT ON Track FOR EACH ROW EXECUTE PROCEDURE f_newSong();
+CREATE OR REPLACE TRIGGER t_newSong BEFORE INSERT ON "Track" FOR EACH ROW EXECUTE PROCEDURE f_newSong();
 
 -- TEST
 INSERT INTO "Track" VALUES(3600, 'Cococabra', 347,2,24,NULL,3214543, 9879432, '0.99');
